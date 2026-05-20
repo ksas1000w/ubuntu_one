@@ -11,11 +11,12 @@ type TodoItemProps = {
 export function TodoItem(
     {task,editingId,editingValue,
         onToggle,onDelete,onEdit,onSave,setEditingValue}:TodoItemProps){
-                return(
-            <li key={task.id}>
+        return(
+            <li className="flex justify-between items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 mb-0.5" key={task.id}>
                 <input type="checkbox" 
                 checked={task.done}
                 onChange={()=>onToggle(task.id)}
+                className="w-4 h-4 accent-blue-500 cursor-pointer"
                 />
                 {editingId===task.id?(
                 <input type="text"
@@ -25,18 +26,19 @@ export function TodoItem(
                     if(e.key==='Enter') onSave(task.id)
                 }}
                 />
-                ):(
-                <span style={{textDecoration:task.done?'line-through':'none'}}>
-                    {task.title}({task.priority})
+                ) : (
+                <span className={`flex-1 text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-700'}`}>
+                    {task.title}
+                    <span className="ml-2, text-xs text-gray-400">({task.priority})</span>
                 </span>
                 )}
                 {editingId===task.id ? (
-                <button onClick={()=>onSave(task.id)}>save</button>
+                <button onClick={()=>onSave(task.id)}>💾</button>
                 ) : (
-                    <button onClick={()=>onEdit(task)}>edit</button>
+                    <button onClick={()=>onEdit(task)}>🖊️</button>
                 ) 
                 }
-                <button onClick={() => onDelete(task.id)}>удалить</button>
+                <button onClick={() => onDelete(task.id)}>🗑️</button>
             </li>
         )
     }

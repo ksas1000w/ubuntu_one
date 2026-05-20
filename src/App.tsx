@@ -65,12 +65,26 @@ export default function App() {
     localStorage.setItem('tasks',JSON.stringify(tasks))
   }, [tasks])
   return (
-    <div>
-      <h1>Мои задачи</h1>
-      <div>
-        <button onClick={()=>setFilter('all')}>все</button>
-        <button onClick={()=>setFilter('active')}>активные</button>
-        <button onClick={()=>setFilter('done')}>выпониные</button>
+
+    <div className='min-h-screenbg-gray-100'>
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6">
+      <h1 className="3x1 font bold text-gray-800 mb-6">Мои задачи</h1>
+      <div className="flex gap-2">
+        <button onClick={()=>setFilter('all')}
+          className={`rounded-b-full font-medium px-4 py-0.5 transition-colors
+            ${filter === 'all' ? 'bg-blue-500 text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+            `}
+          >все</button>
+        <button onClick={()=>setFilter('active')}
+          className={`rounded-b-full font-medium px-4 py-0.5 transition-colors
+            ${filter === 'all' ? 'bg-blue-500 text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+            `}
+          >активные</button>
+        <button onClick={()=>setFilter('done')}
+          className={`rounded-b-full font-medium px-4 py-0.5 transition-colors
+            ${filter === 'all' ? 'bg-blue-500 text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+            `}
+          >выпониные</button>
       </div>
       <ul>
         {filteredTasks.map((task) => (
@@ -86,12 +100,14 @@ export default function App() {
           />
         ))}
       </ul>
+      <div className='flex flex-col gap-1 mt-5'>
       <input
         type="text"
         placeholder="задача"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={(e) => { if (e.key === 'Enter') handleAdd(); }}
+        className="border border-gray-300 rounded-lg px-3 py-1 text-sm outline-none focus:border-blue-400 transition-colors"
       />
       <input
         type="text"
@@ -99,8 +115,13 @@ export default function App() {
         value={priorityValue}
         onChange={(e) => setPriorityValue(e.target.value)}
         onKeyDown={(e) => { if (e.key === 'Enter') handleAdd(); }}
+        className="border border-gray-300 rounded-lg px-3 py-1 text-sm outline-none focus:border-blue-400 transition-colors"
       />
-      <button onClick={handleAdd}>Добавить</button>
+      <button onClick={handleAdd} className=
+      "bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition-colors"
+      >Добавить</button>
+      </div>
+      </div>
     </div>
   )
 }
